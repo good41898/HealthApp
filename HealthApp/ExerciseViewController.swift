@@ -52,13 +52,15 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
         // Dismiss the picker if the user canceled.
         dismiss(animated: true, completion: nil)
     }
+  
+ 
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         // The info dictionary may contain multiple representations of the image. You want to use the original.
-        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+         guard let selectedImage = info[.originalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }
+         }
         
         // Set photoImageView to display the selected image.
         photoImageView.image = selectedImage
@@ -66,7 +68,7 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
     }
-    
+
     //MARK: Navigation
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {

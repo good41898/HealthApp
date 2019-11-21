@@ -7,7 +7,8 @@
 //
 
 import XCTest
-@testable import FoodTracker
+
+//@testable import FoodTracker
 
 class FoodTrackerTests: XCTestCase {
     
