@@ -12,11 +12,12 @@
 		936B4B871DB54E8F0090E3EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936B4B851DB54E8F0090E3EE /* Main.storyboard */; };
 		936B4B891DB54E8F0090E3EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 936B4B881DB54E8F0090E3EE /* Assets.xcassets */; };
 		936B4B8C1DB54E8F0090E3EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936B4B8A1DB54E8F0090E3EE /* LaunchScreen.storyboard */; };
-		936B4B971DB54E8F0090E3EE /* FoodTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936B4B961DB54E8F0090E3EE /* FoodTrackerTests.swift */; };
+		936B4B971DB54E8F0090E3EE /* HealthAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936B4B961DB54E8F0090E3EE /* HealthAppTests.swift */; };
 		939722391DD4ED9800ACC1D0 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939722381DD4ED9800ACC1D0 /* Exercise.swift */; };
 		93B36E631DDB8D3A00334F4A /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B36E621DDB8D3A00334F4A /* ExerciseTableViewCell.swift */; };
 		93B36E651DDBE63500334F4A /* ExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B36E641DDBE63500334F4A /* ExerciseTableViewController.swift */; };
 		93E91EF11DCA8F83003E4C01 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E91EF01DCA8F83003E4C01 /* RatingControl.swift */; };
+		FF551F17238C90CD003BA8E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF551F16238C90CD003BA8E9 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,12 +39,13 @@
 		936B4B8B1DB54E8F0090E3EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		936B4B8D1DB54E8F0090E3EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		936B4B921DB54E8F0090E3EE /* FoodTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		936B4B961DB54E8F0090E3EE /* FoodTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerTests.swift; sourceTree = "<group>"; };
+		936B4B961DB54E8F0090E3EE /* HealthAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAppTests.swift; sourceTree = "<group>"; };
 		936B4B981DB54E8F0090E3EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		939722381DD4ED9800ACC1D0 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		93B36E621DDB8D3A00334F4A /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		93B36E641DDBE63500334F4A /* ExerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewController.swift; sourceTree = "<group>"; };
 		93E91EF01DCA8F83003E4C01 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
+		FF551F16238C90CD003BA8E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +69,9 @@
 		936B4B751DB54E8F0090E3EE = {
 			isa = PBXGroup;
 			children = (
-				936B4B801DB54E8F0090E3EE /* FoodTracker */,
-				936B4B951DB54E8F0090E3EE /* FoodTrackerTests */,
+				FF551F16238C90CD003BA8E9 /* Default-568h@2x.png */,
+				936B4B801DB54E8F0090E3EE /* HealthApp */,
+				936B4B951DB54E8F0090E3EE /* HealthAppTests */,
 				936B4B7F1DB54E8F0090E3EE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,7 +85,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		936B4B801DB54E8F0090E3EE /* FoodTracker */ = {
+		936B4B801DB54E8F0090E3EE /* HealthApp */ = {
 			isa = PBXGroup;
 			children = (
 				936B4B811DB54E8F0090E3EE /* AppDelegate.swift */,
@@ -96,16 +99,16 @@
 				936B4B8A1DB54E8F0090E3EE /* LaunchScreen.storyboard */,
 				936B4B8D1DB54E8F0090E3EE /* Info.plist */,
 			);
-			path = FoodTracker;
+			path = HealthApp;
 			sourceTree = "<group>";
 		};
-		936B4B951DB54E8F0090E3EE /* FoodTrackerTests */ = {
+		936B4B951DB54E8F0090E3EE /* HealthAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				936B4B961DB54E8F0090E3EE /* FoodTrackerTests.swift */,
+				936B4B961DB54E8F0090E3EE /* HealthAppTests.swift */,
 				936B4B981DB54E8F0090E3EE /* Info.plist */,
 			);
-			path = FoodTrackerTests;
+			path = HealthAppTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,7 +170,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 936B4B791DB54E8F0090E3EE /* Build configuration list for PBXProject "FoodTracker" */;
+			buildConfigurationList = 936B4B791DB54E8F0090E3EE /* Build configuration list for PBXProject "HealthApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -193,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				936B4B8C1DB54E8F0090E3EE /* LaunchScreen.storyboard in Resources */,
+				FF551F17238C90CD003BA8E9 /* Default-568h@2x.png in Resources */,
 				936B4B891DB54E8F0090E3EE /* Assets.xcassets in Resources */,
 				936B4B871DB54E8F0090E3EE /* Main.storyboard in Resources */,
 			);
@@ -225,7 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				936B4B971DB54E8F0090E3EE /* FoodTrackerTests.swift in Sources */,
+				936B4B971DB54E8F0090E3EE /* HealthAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,9 +362,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = FoodTracker/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/HealthApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.FoodTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.HealthApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -370,9 +374,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = FoodTracker/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/HealthApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.FoodTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.HealthApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -409,7 +413,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		936B4B791DB54E8F0090E3EE /* Build configuration list for PBXProject "FoodTracker" */ = {
+		936B4B791DB54E8F0090E3EE /* Build configuration list for PBXProject "HealthApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				936B4B991DB54E8F0090E3EE /* Debug */,
