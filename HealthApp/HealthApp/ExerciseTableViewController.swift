@@ -19,7 +19,7 @@ class ExerciseTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Use the edit button item provided by the table view controller.
-        navigationItem.leftBarButtonItem = editButtonItem
+        //navigationItem.leftBarButtonItem = editButtonItem
         
         // Load any saved exercises, otherwise load sample data.
         if let savedExercises = loadExercises() {
