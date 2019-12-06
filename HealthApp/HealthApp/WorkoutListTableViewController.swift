@@ -159,7 +159,7 @@ class WorkoutListTableViewController: UITableViewController {
     }
     
     private func loadWorkouts() -> [Workout]?  {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Exercise.ArchiveURL.path) as? [Workout]
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Workout.ArchiveURL.path) as? [Workout]
     }
 
 }
