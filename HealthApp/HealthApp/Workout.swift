@@ -58,12 +58,12 @@ class Workout: NSObject, NSCoding {
             os_log("Unable to decode the user for a Workout object.", log: OSLog.default, type: .debug)
             return nil
         }
-        
+                
         guard let segments = aDecoder.decodeObject(forKey: PropertyKey.segments) as? [WorkoutSegment] else {
             os_log("Unable to decode the segments for a Workout object.", log: OSLog.default, type: .debug)
             return nil
         }
-        
+
         // Must call designated initializer.
         self.init(name: name, user: user, segments: segments)
         

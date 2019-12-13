@@ -17,7 +17,7 @@ class PreferenceSet: NSObject, NSCoding {
     var user: String
     var equipment: [String]
     var bodyPart: [String]
-    var mode: Int
+    var mode: String
         
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -35,7 +35,7 @@ class PreferenceSet: NSObject, NSCoding {
     
     //MARK: Initialization
     
-    init?(name: String, user: String, equipment: [String], bodyPart: [String], mode: Int) {
+    init?(name: String, user: String, equipment: [String], bodyPart: [String], mode: String) {
         // Initialize stored properties.
         self.name = name
         self.user = user
@@ -63,22 +63,22 @@ class PreferenceSet: NSObject, NSCoding {
         }
                 
         guard let user = aDecoder.decodeObject(forKey: PropertyKey.user) as? String else {
-            os_log("Unable to decode the user for a Workout object.", log: OSLog.default, type: .debug)
+            os_log("Unable to decode the user for a PreferenceSet object.", log: OSLog.default, type: .debug)
             return nil
         }
         
         guard let bodyPart = aDecoder.decodeObject(forKey: PropertyKey.bodyPart) as? [String] else {
-            os_log("Unable to decode the bodyPart for a Workout object.", log: OSLog.default, type: .debug)
+            os_log("Unable to decode the bodyPart for a PreferenceSet object.", log: OSLog.default, type: .debug)
             return nil
         }
         
         guard let equipment = aDecoder.decodeObject(forKey: PropertyKey.equipment) as? [String] else {
-            os_log("Unable to decode the segments for a equipment object.", log: OSLog.default, type: .debug)
+            os_log("Unable to decode the equipment for a PreferenceSet object.", log: OSLog.default, type: .debug)
             return nil
         }
         
-        guard let mode = aDecoder.decodeObject(forKey: PropertyKey.mode) as? Int else {
-            os_log("Unable to decode the mode for a Workout object.", log: OSLog.default, type: .debug)
+        guard let mode = aDecoder.decodeObject(forKey: PropertyKey.mode) as? String else {
+            os_log("Unable to decode the mode for a PreferenceSet object.", log: OSLog.default, type: .debug)
             return nil
         }
         

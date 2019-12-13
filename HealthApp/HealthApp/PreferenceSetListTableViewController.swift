@@ -94,7 +94,7 @@ class PreferenceSetListTableViewController: UITableViewController {
     
     @IBAction func unwindToPreferenceSetList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? CreatePreferenceSetViewController, let preference = sourceViewController.preference {
-            
+            os_log("UNWINDING.", log: OSLog.default, type: .debug)
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing exercise.
                 preferences[selectedIndexPath.row] = preference
@@ -117,7 +117,7 @@ class PreferenceSetListTableViewController: UITableViewController {
     
     private func loadSamplePreferenceSets() {
         
-        guard let preference1 = PreferenceSet(name: "Gabby's Preferences", user: "Gabby Good", equipment: ["dumbbells", "squat rack", "treadmill"], bodyPart: ["arms", "quads"], mode: 0) else {
+        guard let preference1 = PreferenceSet(name: "Gabby's Preferences", user: "Gabby Good", equipment: ["dumbbells", "squat rack", "treadmill"], bodyPart: ["arms", "quads"], mode: "Cardio") else {
             fatalError("Unable to instantiate preference1")
         }
 
@@ -125,6 +125,7 @@ class PreferenceSetListTableViewController: UITableViewController {
     }
     
     private func savePreferences() {
+        os_log("SAVING.", log: OSLog.default, type: .debug)
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(preferences, toFile: PreferenceSet.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("Preferences successfully saved.", log: OSLog.default, type: .debug)

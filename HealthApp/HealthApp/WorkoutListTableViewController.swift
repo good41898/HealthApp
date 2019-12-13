@@ -17,13 +17,16 @@ class WorkoutListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
+                do { try FileManager.default.removeItem(at: FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("workouts")) } catch { os_log("couldn't delete")}
+        */
         // Load any saved exercises, otherwise load sample data.
         if let savedWorkouts = loadWorkouts() {
             workouts += savedWorkouts
         }
         else {
             // Load the sample data.
+            os_log("LOADING SAMPLE WORKOUTS")
             loadSampleWorkouts()
         }
     }
@@ -88,22 +91,6 @@ class WorkoutListTableViewController: UITableViewController {
         }
     }
     
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-    
     //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -126,6 +113,9 @@ class WorkoutListTableViewController: UITableViewController {
             
             let selectedWorkout = workouts[indexPath.row]
             workoutDetailViewController.workout = selectedWorkout
+        
+        case "addWorkout":
+            os_log("creating new workout")
             
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
@@ -138,19 +128,74 @@ class WorkoutListTableViewController: UITableViewController {
         
         let exercises = NSKeyedUnarchiver.unarchiveObject(withFile: Exercise.ArchiveURL.path) as? [Exercise]
         
-        guard let segment1 = WorkoutSegment(exercise: exercises![0], sets: 1, reps: 1, weight: 1) else {
+        guard let segment1 = WorkoutSegment(exercise: exercises![0], sets: 3, reps: 10, weight: 50) else {
+            fatalError("Unable to create Segment")
+        }
+        
+        guard let segment2 = WorkoutSegment(exercise: exercises![1], sets: 3, reps: 10, weight: 50) else {
+            fatalError("Unable to create Segment")
+        }
+        
+        guard let segment3 = WorkoutSegment(exercise: exercises![3], sets:3, reps: 10, weight: 50) else {
             fatalError("Unable to create Segment")
         }
 
-        guard let workout1 = Workout(name: "Gabby's Great Workout", user: "Gabby Good", segments: [segment1]) else {
+        guard let workout1 = Workout(name: "Gabby's Great Workout", user: "Gabby Good", segments: [segment1, segment2, segment3]) else {
             fatalError("Unable to instantiate exercise1")
         }
 
         workouts += [workout1]
     }
     
+    @IBAction func unwindToSelectPreferenceSet(sender: UIStoryboardSegue) {
+        os_log("IN UNWIND")
+        let exercises = NSKeyedUnarchiver.unarchiveObject(withFile: Exercise.ArchiveURL.path) as? [Exercise]
+        
+        if let sourceViewController = sender.source as? SelectPreferenceSetTableViewController, let preferenceSet = sourceViewController.selectedPreferenceSet, let workoutName = sourceViewController.workoutName {
+            
+            let newWorkout = generateNewWorkout(name: workoutName, preferenceSet: preferenceSet)
+            
+            guard let segment1 = WorkoutSegment(exercise: exercises![0], sets: 3, reps: 10, weight: 50) else {
+                fatalError("Unable to create Segment")
+            }
+            
+            print("SEGMENT NAME: " + segment1.exercise.name)
+            
+            os_log("CREATED SEGMENT")
+            /*
+            guard let newWorkout = Workout(name: workoutName, user: "Bob", segments: [segment1]) else {
+                fatalError("Unable to instantiate exercise1")
+            }
+            */
+            os_log("CREATED WORKOUT")
+            let newIndexPath = IndexPath(row: workouts.count, section: 0)
+            
+            workouts.append(newWorkout!)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            
+            os_log("BEFORE SAVEWORKOUTS")
+            // Save the exercises.
+            saveWorkouts()
+        }
+    }
+    
+    private func generateNewWorkout(name: String, preferenceSet: PreferenceSet) -> Workout? {
+        let exercises = NSKeyedUnarchiver.unarchiveObject(withFile: Exercise.ArchiveURL.path) as? [Exercise]
+        guard let segment1 = WorkoutSegment(exercise: exercises![0], sets: 3, reps: 10, weight: 50) else {
+            os_log("unable to create workout segment")
+            return nil
+        }
+        guard let workout = Workout(name: name, user: "Bob", segments: [segment1]) else {
+            os_log("unable to create workout")
+            return nil
+        }
+        return workout
+    }
+    
     private func saveWorkouts() {
+        os_log("IN SAVEWORKOUTS")
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(workouts, toFile: Workout.ArchiveURL.path)
+        os_log("AFTER ARCHIVEROOTOBJECT")
         if isSuccessfulSave {
             os_log("Workouts successfully saved.", log: OSLog.default, type: .debug)
         } else {

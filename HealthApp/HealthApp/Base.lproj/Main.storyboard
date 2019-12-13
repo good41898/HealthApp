@@ -306,13 +306,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-v3-iA5">
-                                <rect key="frame" x="35" y="518" width="118" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="modeSlider:" destination="4Hl-cb-4hX" eventType="valueChanged" id="lbh-1V-niT"/>
-                                </connections>
-                            </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preference Set Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vnm-nd-MBq">
                                 <rect key="frame" x="37" y="52" width="163" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -322,6 +315,12 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter preference set name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDd-5f-Zaf">
                                 <rect key="frame" x="37" y="77" width="224" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FN7-Zg-8gR">
+                                <rect key="frame" x="37" y="510" width="265" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -346,7 +345,7 @@
                         <outlet property="backSwitch" destination="pgt-NI-rIc" id="0G6-uc-coS"/>
                         <outlet property="barbellSwitch" destination="Vqs-nK-7dz" id="IXN-gU-VYO"/>
                         <outlet property="legsSwitch" destination="kCt-3k-gbD" id="Axs-Xs-jOv"/>
-                        <outlet property="modeSlider" destination="qSC-v3-iA5" id="aj4-ao-hbT"/>
+                        <outlet property="modePickerTextField" destination="FN7-Zg-8gR" id="93H-aw-EUF"/>
                         <outlet property="nameTextField" destination="fDd-5f-Zaf" id="lA1-no-0HT"/>
                         <outlet property="saveButton" destination="B7q-l5-nAo" id="e7j-Ry-Qu7"/>
                         <outlet property="squatRackSwitch" destination="0D2-if-mua" id="AE8-QV-TK1"/>
@@ -441,11 +440,60 @@
                             <outlet property="delegate" destination="fZm-ea-k2K" id="ANZ-l0-pOe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Your Workouts" id="Cl3-i2-GzC"/>
+                    <navigationItem key="navigationItem" title="Your Workouts" id="Cl3-i2-GzC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LkV-cV-Nfg">
+                            <connections>
+                                <segue destination="pSh-ak-2PW" kind="show" identifier="addWorkout" id="y96-qc-H6X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bV0-fT-iI1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1903.2" y="841.52923538230891"/>
+            <point key="canvasLocation" x="1804" y="987"/>
+        </scene>
+        <!--Select a Preference Set-->
+        <scene sceneID="kol-6J-ELK">
+            <objects>
+                <tableViewController id="e7a-sZ-0DY" customClass="SelectPreferenceSetTableViewController" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5EZ-uT-tmN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectPreferenceSetCellTableViewCell" rowHeight="90" id="75r-cZ-tXg" customClass="SelectPreferenceSetCellTableViewCell" customModule="FoodTracker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="75r-cZ-tXg" id="q4e-aD-fGs">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeT-OA-M7p">
+                                            <rect key="frame" x="16" y="11" width="343" height="34"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="CeT-OA-M7p" id="azs-wQ-64m"/>
+                                    <segue destination="NQf-EK-J5H" kind="unwind" unwindAction="unwindToSelectPreferenceSetWithSender:" id="EFh-OM-m7x"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="e7a-sZ-0DY" id="J4k-Jw-Cq4"/>
+                            <outlet property="delegate" destination="e7a-sZ-0DY" id="f2q-iI-8uI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select a Preference Set" id="Lnw-34-KOG"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s7r-C9-eN9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="NQf-EK-J5H" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2031.2" y="1891.304347826087"/>
         </scene>
         <!--Workout Table View Controller-->
         <scene sceneID="3Y3-A2-tjY">
@@ -568,6 +616,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uzL-eG-1pD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-890.39999999999998" y="1077.2113943028487"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ra4-6n-ouD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pSh-ak-2PW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="J6Z-6i-6I6"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3z1-1Q-gUs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="e7a-sZ-0DY" kind="relationship" relationship="rootViewController" id="r3j-EO-Csm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5FZ-wn-C2Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1092" y="1891.304347826087"/>
         </scene>
     </scenes>
     <resources>

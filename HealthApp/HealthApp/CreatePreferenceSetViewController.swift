@@ -9,7 +9,7 @@
 import UIKit
 import os.log
 
-class CreatePreferenceSetViewController: UIViewController {
+class CreatePreferenceSetViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -21,27 +21,44 @@ class CreatePreferenceSetViewController: UIViewController {
     @IBOutlet weak var armsSwitch: UISwitch!
     @IBOutlet weak var legsSwitch: UISwitch!
     @IBOutlet weak var backSwitch: UISwitch!
-    
-    @IBOutlet weak var modeSlider: UISlider!
-    
+        
     var preference: PreferenceSet?
+    
+    @IBOutlet weak var modePickerTextField: UITextField!
+    
+    let modeOptions = ["Choose workout mode", "Cardio", "Strength", "Hybrid"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+
+        modePickerTextField.inputView = pickerView
 
         // Do any additional setup after loading the view.
     }
     
+    // Sets number of columns in picker view
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+       return 1
+   }
 
-    /*
-    // MARK: - Navigation
+   // Sets the number of rows in the picker view
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+       return modeOptions.count
+   }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   // This function sets the text of the picker view to the content of the "salutations" array
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+       return modeOptions[row]
+   }
+
+   // When user selects an option, this function will set the text of the text field to reflect
+   // the selected option.
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+       modePickerTextField.text = modeOptions[row]
+   }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -81,7 +98,7 @@ class CreatePreferenceSetViewController: UIViewController {
             bodyPart += ["back"]
         }
         // Set the exercise to be passed to ExerciseTableViewController after the unwind segue.
-        preference = PreferenceSet(name: name, user: "Gabby Good", equipment: equipment, bodyPart: bodyPart, mode: 0)
+        preference = PreferenceSet(name: name, user: "Gabby Good", equipment: equipment, bodyPart: bodyPart, mode: "Cardio")
     }
 
     @IBAction func cancel(_ sender: UIBarButtonItem) {
