@@ -17,9 +17,12 @@ class WorkoutListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         /*
                 do { try FileManager.default.removeItem(at: FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("workouts")) } catch { os_log("couldn't delete")}
-        */
+        
+        do { try FileManager.default.removeItem(at: FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("exercises")) } catch { os_log("couldn't delete")}
+        **/
         // Load any saved exercises, otherwise load sample data.
         if let savedWorkouts = loadWorkouts() {
             workouts += savedWorkouts
@@ -136,7 +139,7 @@ class WorkoutListTableViewController: UITableViewController {
             fatalError("Unable to create Segment")
         }
         
-        guard let segment3 = WorkoutSegment(exercise: exercises![3], sets:3, reps: 10, weight: 50) else {
+        guard let segment3 = WorkoutSegment(exercise: exercises![2], sets:3, reps: 10, weight: 50) else {
             fatalError("Unable to create Segment")
         }
 
@@ -181,11 +184,55 @@ class WorkoutListTableViewController: UITableViewController {
     
     private func generateNewWorkout(name: String, preferenceSet: PreferenceSet) -> Workout? {
         let exercises = NSKeyedUnarchiver.unarchiveObject(withFile: Exercise.ArchiveURL.path) as? [Exercise]
-        guard let segment1 = WorkoutSegment(exercise: exercises![0], sets: 3, reps: 10, weight: 50) else {
-            os_log("unable to create workout segment")
-            return nil
+        
+        var validExercises = [Exercise]()
+                
+        for exercise in exercises! {
+            var validBodyPart = true
+            var validEquipment = true
+            
+            if !exercise.equipment.isSubset(of: preferenceSet.equipment) && !exercise.equipment.isEmpty {
+                validEquipment = false
+            }
+            if !exercise.bodyPart.isSubset(of: preferenceSet.bodyPart) {
+                validBodyPart = false
+            }
+            if validBodyPart && validEquipment {
+                validExercises += [exercise]
+            }
         }
-        guard let workout = Workout(name: name, user: "Bob", segments: [segment1]) else {
+        
+        let numSegments = 10
+        var segments = [WorkoutSegment]()
+        
+        for _ in 1...numSegments {
+            if validExercises.isEmpty {
+                break
+            }
+            
+            let num = Int.random(in: 0..<validExercises.count)
+            
+            let exercise = validExercises[num]
+            validExercises.remove(at: num)
+            
+            let sets = Int.random(in: 1..<10)
+            var reps = 0
+            if sets <= 3 {
+                reps = Int.random(in: 1..<20)
+            } else if sets <= 6 {
+                reps = Int.random(in: 1..<10)
+            } else {
+                reps = Int.random(in: 1..<5)
+            }
+            guard let segment = WorkoutSegment(exercise: exercise, sets: sets, reps: reps, weight: 0) else {
+                os_log("unable to create workout segment")
+                return nil
+            }
+            
+            segments += [segment]
+        }
+        
+        guard let workout = Workout(name: name, user: "Bob", segments: segments) else {
             os_log("unable to create workout")
             return nil
         }

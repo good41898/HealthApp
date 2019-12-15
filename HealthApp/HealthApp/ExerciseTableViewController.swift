@@ -22,6 +22,8 @@ class ExerciseTableViewController: UITableViewController {
         //navigationItem.leftBarButtonItem = editButtonItem
         
         // Load any saved exercises, otherwise load sample data.
+        loadSampleExercises()
+        /*
         if let savedExercises = loadExercises() {
             exercises += savedExercises
         }
@@ -29,6 +31,7 @@ class ExerciseTableViewController: UITableViewController {
             // Load the sample data.
             loadSampleExercises()
         }
+ */
     }
 
     override func didReceiveMemoryWarning() {
@@ -165,23 +168,111 @@ class ExerciseTableViewController: UITableViewController {
     
     private func loadSampleExercises() {
         
-        let photo1 = UIImage(named: "exercise1")
-        let photo2 = UIImage(named: "exercise2")
-        let photo3 = UIImage(named: "exercise3")
-
-        guard let exercise1 = Exercise(name: "Bench Press", photo: photo1, equipment: "Bench, Barbell, Plates", bodyPart: "Chest, Forearms, Shoulders") else {
+        let photo1 = UIImage(named: "air_squat")
+        
+        guard let exercise1 = Exercise(name: "Air Squat", photo: photo1, equipment: Set<String>(["bodyweight"]), bodyPart: Set<String>(["legs"])) else {
             fatalError("Unable to instantiate exercise1")
         }
-
-        guard let exercise2 = Exercise(name: "Back Squat", photo: photo2, equipment: "Barbell, Plates, Squat Rack", bodyPart: "Body Part: Quads") else {
-            fatalError("Unable to instantiate exercise2")
+        
+        exercises += [exercise1]
+        
+        let photo2 = UIImage(named: "burpee")
+        
+        guard let exercise2 = Exercise(name: "Burpee", photo: photo2, equipment: Set<String>(["bodyweight"]), bodyPart: Set<String>(["legs", "arms"])) else {
+            fatalError("Unable to instantiate exercise1")
         }
-
-        guard let exercise3 = Exercise(name: "Plank", photo: photo3, equipment: "None", bodyPart: "Body Park: Core") else {
-            fatalError("Unable to instantiate exercise2")
+        
+        exercises += [exercise2]
+        
+        let photo3 = UIImage(named: "barbell_thruster")
+        
+        guard let exercise3 = Exercise(name: "Barbell Thruster", photo: photo3, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms"])) else {
+            fatalError("Unable to instantiate exercise1")
         }
-
-        exercises += [exercise1, exercise2, exercise3]
+        
+        exercises += [exercise3]
+        
+        let photo4 = UIImage(named: "pull_up")
+        
+        guard let exercise4 = Exercise(name: "Pull Up", photo: photo4, equipment: Set<String>(["pull up bar"]), bodyPart: Set<String>(["arms"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise4]
+        
+        let photo5 = UIImage(named: "stat_db_lunge")
+        
+        guard let exercise5 = Exercise(name: "Stationary DB Lunge", photo: photo5, equipment: Set<String>(["dumbbell"]), bodyPart: Set<String>(["legs", "arms"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise5]
+        
+        let photo6 = UIImage(named: "alt_db_snatch")
+        
+        guard let exercise6 = Exercise(name: "Alt Dumbbell Snatch", photo: photo6, equipment: Set<String>(["dumbbell"]), bodyPart: Set<String>(["legs", "arms"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise6]
+        
+        let photo7 = UIImage(named: "row_sprint")
+        
+        guard let exercise7 = Exercise(name: "Cal Row Sprint", photo: photo7, equipment: Set<String>(["rower"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise7]
+        
+        let photo8 = UIImage(named: "wb_shot")
+        
+        guard let exercise8 = Exercise(name: "Wall Ball Shots", photo: photo8, equipment: Set<String>(["medicine ball"]), bodyPart: Set<String>(["legs", "arms"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise8]
+        
+        let photo9 = UIImage(named: "medball_clean")
+        
+        guard let exercise9 = Exercise(name: "Med Ball Clean", photo: photo9, equipment: Set<String>(["medicine ball"]), bodyPart: Set<String>(["legs", "arms"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise9]
+        
+        let photo10 = UIImage(named: "barbell_deadlift")
+        
+        guard let exercise10 = Exercise(name: "Barbell Deadlift", photo: photo10, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise10]
+        
+        let photo11 = UIImage(named: "hang_power_clean")
+        
+        guard let exercise11 = Exercise(name: "Hang Power Clean", photo: photo11, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise11]
+        
+        let photo12 = UIImage(named: "power_clean")
+        
+        guard let exercise12 = Exercise(name: "Power Clean", photo: photo12, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise12]
+        
+        let photo13 = UIImage(named: "db_deadlift")
+        
+        guard let exercise13 = Exercise(name: "Dumbbell Deadlift", photo: photo13, equipment: Set<String>(["dumbbell"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise13]
+    
+        saveExercises()
     }
     
     private func saveExercises() {

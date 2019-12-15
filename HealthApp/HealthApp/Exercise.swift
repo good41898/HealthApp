@@ -16,8 +16,8 @@ class Exercise: NSObject, NSCoding {
     
     var name: String
     var photo: UIImage?
-    var equipment: String
-    var bodyPart: String
+    var equipment: Set<String>
+    var bodyPart: Set<String>
     
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -34,7 +34,7 @@ class Exercise: NSObject, NSCoding {
     
     //MARK: Initialization
     
-    init?(name: String, photo: UIImage?, equipment: String, bodyPart: String) {
+    init?(name: String, photo: UIImage?, equipment: Set<String>, bodyPart: Set<String>) {
         
         // The name must not be empty
         guard !name.isEmpty else {
@@ -77,12 +77,12 @@ class Exercise: NSObject, NSCoding {
         // Because photo is an optional property of Exercise, just use conditional cast.
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
                 
-        guard let equipment = aDecoder.decodeObject(forKey: PropertyKey.equipment) as? String else {
+        guard let equipment = aDecoder.decodeObject(forKey: PropertyKey.equipment) as? Set<String> else {
             os_log("Unable to decode the name for a Exercise object.", log: OSLog.default, type: .debug)
             return nil
         }
         
-        guard let bodyPart = aDecoder.decodeObject(forKey: PropertyKey.bodyPart) as? String else {
+        guard let bodyPart = aDecoder.decodeObject(forKey: PropertyKey.bodyPart) as? Set<String> else {
             os_log("Unable to decode the name for a Exercise object.", log: OSLog.default, type: .debug)
             return nil
         }

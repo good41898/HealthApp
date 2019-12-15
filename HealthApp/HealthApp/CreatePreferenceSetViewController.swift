@@ -17,11 +17,20 @@ class CreatePreferenceSetViewController: UIViewController, UIPickerViewDataSourc
     @IBOutlet weak var barbellSwitch: UISwitch!
     @IBOutlet weak var squatRackSwitch: UISwitch!
     @IBOutlet weak var treadmillSwitch: UISwitch!
+    @IBOutlet weak var rowerSwitch: UISwitch!
+    @IBOutlet weak var kettlebellSwitch: UISwitch!
+    @IBOutlet weak var dumbbellSwitch: UISwitch!
+    @IBOutlet weak var pullUpBarSwitch: UISwitch!
+    @IBOutlet weak var airBikeSwitch: UISwitch!
+    @IBOutlet weak var medicineBallSwitch: UISwitch!
+    @IBOutlet weak var plyoBoxSwitch: UISwitch!
+    @IBOutlet weak var bodyweightSwitch: UISwitch!
     
     @IBOutlet weak var armsSwitch: UISwitch!
     @IBOutlet weak var legsSwitch: UISwitch!
     @IBOutlet weak var backSwitch: UISwitch!
-        
+    @IBOutlet weak var chestSwitch: UISwitch!
+    
     var preference: PreferenceSet?
     
     @IBOutlet weak var modePickerTextField: UITextField!
@@ -71,32 +80,71 @@ class CreatePreferenceSetViewController: UIViewController, UIPickerViewDataSourc
         }
         
         let name = nameTextField.text ?? ""
-        var equipment = [String]()
-        var bodyPart = [String]()
+        var equipment = Set<String>()
+        var bodyPart = Set<String>()
+        
+        equipment.insert("none")
         
         if barbellSwitch.isOn {
-            equipment += ["barbell"]
+            equipment.insert("barbell")
         }
         
         if squatRackSwitch.isOn {
-            equipment += ["squat rack"]
+            equipment.insert("squat rack")
         }
         
         if treadmillSwitch.isOn {
-            equipment += ["treadmill"]
+            equipment.insert("treadmill")
+        }
+        
+        if rowerSwitch.isOn {
+            equipment.insert("rower")
+        }
+        
+        if kettlebellSwitch.isOn {
+            equipment.insert("kettlebell")
+        }
+        
+        if dumbbellSwitch.isOn {
+            equipment.insert("dumbbell")
+        }
+        
+        if pullUpBarSwitch.isOn {
+            equipment.insert("pull up bar")
+        }
+        
+        if airBikeSwitch.isOn {
+            equipment.insert("air bike")
+        }
+        
+        if medicineBallSwitch.isOn {
+            equipment.insert("medicine ball")
+        }
+        
+        if plyoBoxSwitch.isOn {
+            equipment.insert("plyo box")
+        }
+        
+        if bodyweightSwitch.isOn {
+            equipment.insert("bodyweight")
         }
         
         if armsSwitch.isOn {
-            bodyPart += ["arms"]
+            bodyPart.insert("arms")
         }
         
         if legsSwitch.isOn {
-            bodyPart += ["legs"]
+            bodyPart.insert("legs")
         }
         
         if backSwitch.isOn {
-            bodyPart += ["back"]
+            bodyPart.insert("back")
         }
+        
+        if chestSwitch.isOn {
+            bodyPart.insert("chest")
+        }
+        
         // Set the exercise to be passed to ExerciseTableViewController after the unwind segue.
         preference = PreferenceSet(name: name, user: "Gabby Good", equipment: equipment, bodyPart: bodyPart, mode: "Cardio")
     }

@@ -15,8 +15,8 @@ class PreferenceSet: NSObject, NSCoding {
     
     var name: String
     var user: String
-    var equipment: [String]
-    var bodyPart: [String]
+    var equipment: Set<String>
+    var bodyPart: Set<String>
     var mode: String
         
     //MARK: Archiving Paths
@@ -35,7 +35,7 @@ class PreferenceSet: NSObject, NSCoding {
     
     //MARK: Initialization
     
-    init?(name: String, user: String, equipment: [String], bodyPart: [String], mode: String) {
+    init?(name: String, user: String, equipment: Set<String>, bodyPart: Set<String>, mode: String) {
         // Initialize stored properties.
         self.name = name
         self.user = user
@@ -67,12 +67,12 @@ class PreferenceSet: NSObject, NSCoding {
             return nil
         }
         
-        guard let bodyPart = aDecoder.decodeObject(forKey: PropertyKey.bodyPart) as? [String] else {
+        guard let bodyPart = aDecoder.decodeObject(forKey: PropertyKey.bodyPart) as? Set<String> else {
             os_log("Unable to decode the bodyPart for a PreferenceSet object.", log: OSLog.default, type: .debug)
             return nil
         }
         
-        guard let equipment = aDecoder.decodeObject(forKey: PropertyKey.equipment) as? [String] else {
+        guard let equipment = aDecoder.decodeObject(forKey: PropertyKey.equipment) as? Set<String> else {
             os_log("Unable to decode the equipment for a PreferenceSet object.", log: OSLog.default, type: .debug)
             return nil
         }

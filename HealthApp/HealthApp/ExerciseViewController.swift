@@ -35,8 +35,8 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
             navigationItem.title = exercise.name
             nameTextField.text = exercise.name
             photoImageView.image = exercise.photo
-            equipmentText.text = exercise.equipment
-            bodyText.text = exercise.bodyPart
+            equipmentText.text = exercise.equipment.joined(separator: ",")
+            bodyText.text = exercise.bodyPart.joined(separator: ",")
         }
         
         // Enable the Save button only if the text field has a valid Exercise name.
@@ -114,8 +114,12 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
         let equipment = equipmentText.text ?? ""
         let bodyPart = bodyText.text ?? ""
         
+        let equipmentSet = Set(equipment.split{$0 == ","}.map(String.init))
+        
+        let bodyPartSet = Set(bodyPart.split{$0 == ","}.map(String.init))
+    
         // Set the exercise to be passed to ExerciseTableViewController after the unwind segue.
-        exercise = Exercise(name: name, photo: photo, equipment: equipment, bodyPart: bodyPart)
+        exercise = Exercise(name: name, photo: photo, equipment: equipmentSet, bodyPart: bodyPartSet)
     }
     
     //MARK: Actions
