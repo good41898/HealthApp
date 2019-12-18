@@ -13,7 +13,11 @@ class ExerciseTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //do {
+        //    try FileManager.default.removeItem(at: FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("exercises"))
+        //}catch{
+          //  print("oh no")
+        //}
         // Use the edit button item provided by the table view controller.
         //navigationItem.leftBarButtonItem = editButtonItem
         
@@ -248,6 +252,38 @@ class ExerciseTableViewController: UITableViewController {
         }
         
         exercises += [exercise13]
+        
+        let photo14 = UIImage(named: "Bench-Press")
+        
+        guard let exercise14 = Exercise(name: "Barbell Bench Press", photo: photo14, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["chest", "arms", "back"]), weights: [0,0,0]) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise14]
+        
+        let photo15 = UIImage(named: "Squat")
+        
+        guard let exercise15 = Exercise(name: "Barbell Back Squat", photo: photo15, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs"]), weights: [0,0,0]) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise15]
+        
+        let photo16 = UIImage(named: "Military_Press")
+        
+        guard let exercise16 = Exercise(name: "Military Press", photo: photo16, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["arms, chest"]), weights: [0,0,0]) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise16]
+        
+        let photo17 = UIImage(named: "Running")
+        
+        guard let exercise17 = Exercise(name: "Running", photo: photo17, equipment: Set<String>(["treadmill, bodyweight"]), bodyPart: Set<String>(["legs"]), weights: [0,0,0]) else {
+            fatalError("Unable to instantiate exercise1")
+        }
+        
+        exercises += [exercise17]
     
         saveExercises()
     }
