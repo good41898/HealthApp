@@ -13,7 +13,6 @@ class PreferenceSet: NSObject, NSCoding {
     var user: String
     var equipment: Set<String>
     var bodyPart: Set<String>
-    var mode: String
     var numExercises: Int
         
     //MARK: Archiving Paths
@@ -27,19 +26,17 @@ class PreferenceSet: NSObject, NSCoding {
         static let user = "user"
         static let equipment = "equipment"
         static let bodyPart = "bodyPart"
-        static let mode = "mode"
         static let numExercises = "numExercises"
     }
     
     //MARK: Initialization
     
-    init?(name: String, user: String, equipment: Set<String>, bodyPart: Set<String>, mode: String, numExercises: Int) {
+    init?(name: String, user: String, equipment: Set<String>, bodyPart: Set<String>, numExercises: Int) {
         // Initialize stored properties.
         self.name = name
         self.user = user
         self.equipment = equipment
         self.bodyPart = bodyPart
-        self.mode = mode
         self.numExercises = numExercises
     }
     
@@ -50,7 +47,6 @@ class PreferenceSet: NSObject, NSCoding {
         aCoder.encode(user, forKey: PropertyKey.user)
         aCoder.encode(equipment, forKey: PropertyKey.equipment)
         aCoder.encode(bodyPart, forKey: PropertyKey.bodyPart)
-        aCoder.encode(mode, forKey: PropertyKey.mode)
         aCoder.encode(numExercises, forKey: PropertyKey.numExercises)
     }
     
@@ -77,15 +73,10 @@ class PreferenceSet: NSObject, NSCoding {
             return nil
         }
         
-        guard let mode = aDecoder.decodeObject(forKey: PropertyKey.mode) as? String else {
-            os_log("Unable to decode the mode for a PreferenceSet object.", log: OSLog.default, type: .debug)
-            return nil
-        }
-        
         let numExercises = aDecoder.decodeInteger(forKey: PropertyKey.numExercises)
         
         // Must call designated initializer.
-        self.init(name: name, user: user, equipment: equipment, bodyPart: bodyPart, mode: mode, numExercises: numExercises)
+        self.init(name: name, user: user, equipment: equipment, bodyPart: bodyPart, numExercises: numExercises)
         
     }
 }

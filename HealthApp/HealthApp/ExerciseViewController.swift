@@ -28,6 +28,11 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
         
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
+        equipmentText.delegate = self
+        bodyText.delegate = self
+        lightWeightTextField.delegate = self
+        medWeightTextField.delegate = self
+        heavyWeightTextField.delegate = self
         
         // Set up views if editing an existing Exercise.
         if let exercise = exercise {
@@ -43,16 +48,6 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
         
         // Enable the Save button only if the text field has a valid Exercise name.
         updateSaveButtonState()
-        
-            /*
-        //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-
-        view.addGestureRecognizer(tap)
- */
     }
     
     //MARK: UITextFieldDelegate
@@ -163,6 +158,5 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
         let text = nameTextField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
     }
-    
 }
 

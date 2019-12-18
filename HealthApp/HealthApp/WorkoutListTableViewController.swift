@@ -117,11 +117,11 @@ class WorkoutListTableViewController: UITableViewController {
         
         let exercises = NSKeyedUnarchiver.unarchiveObject(withFile: Exercise.ArchiveURL.path) as? [Exercise]
         
-        guard let segment1 = WorkoutSegment(exercise: exercises![0], sets: 3, reps: 10, weight: 50) else {
+        guard let segment1 = WorkoutSegment(exercise: exercises![0], sets: 3, reps: 10, weight: 0) else {
             fatalError("Unable to create Segment")
         }
         
-        guard let segment2 = WorkoutSegment(exercise: exercises![1], sets: 3, reps: 10, weight: 50) else {
+        guard let segment2 = WorkoutSegment(exercise: exercises![1], sets: 3, reps: 10, weight: 0) else {
             fatalError("Unable to create Segment")
         }
         
@@ -137,15 +137,9 @@ class WorkoutListTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToSelectPreferenceSet(sender: UIStoryboardSegue) {
-        let exercises = NSKeyedUnarchiver.unarchiveObject(withFile: Exercise.ArchiveURL.path) as? [Exercise]
-        
         if let sourceViewController = sender.source as? SelectPreferenceSetTableViewController, let preferenceSet = sourceViewController.selectedPreferenceSet, let workoutName = sourceViewController.workoutName {
             
             let newWorkout = generateNewWorkout(name: workoutName, preferenceSet: preferenceSet)
-            
-            guard let segment1 = WorkoutSegment(exercise: exercises![0], sets: 3, reps: 10, weight: 50) else {
-                fatalError("Unable to create Segment")
-            }
             
             let newIndexPath = IndexPath(row: workouts.count, section: 0)
             

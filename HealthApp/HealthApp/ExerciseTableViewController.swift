@@ -13,11 +13,7 @@ class ExerciseTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //do {
-        //    try FileManager.default.removeItem(at: FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("exercises"))
-        //}catch{
-          //  print("oh no")
-        //}
+        
         // Use the edit button item provided by the table view controller.
         //navigationItem.leftBarButtonItem = editButtonItem
         
