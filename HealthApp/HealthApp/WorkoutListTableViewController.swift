@@ -1,10 +1,6 @@
 //
 //  WorkoutTableViewController.swift
-//  FoodTracker
-//
-//  Created by Jane Appleseed on 11/15/16.
-//  Copyright © 2016 Apple Inc. All rights reserved.
-//
+//  HealthApp
 
 import UIKit
 import os.log
@@ -18,18 +14,12 @@ class WorkoutListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-                do { try FileManager.default.removeItem(at: FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("workouts")) } catch { os_log("couldn't delete")}
-        
-        do { try FileManager.default.removeItem(at: FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("exercises")) } catch { os_log("couldn't delete")}
-        **/
         // Load any saved exercises, otherwise load sample data.
         if let savedWorkouts = loadWorkouts() {
             workouts += savedWorkouts
         }
         else {
             // Load the sample data.
-            os_log("LOADING SAMPLE WORKOUTS")
             loadSampleWorkouts()
         }
     }
@@ -54,15 +44,11 @@ class WorkoutListTableViewController: UITableViewController {
         
         // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "WorkoutListTableViewCell"
-        
-        print("BEFORE DEQUE")
-        
+                
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? WorkoutListTableViewCell  else {
             fatalError("The dequeued cell is not an instance of WorkoutListTableViewCell.")
         }
-        
-        print("AFTER DEQUE")
-        
+                
         // Fetches the appropriate exercise for the data source layout.
         let workout = workouts[indexPath.row]
         
@@ -151,7 +137,6 @@ class WorkoutListTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToSelectPreferenceSet(sender: UIStoryboardSegue) {
-        os_log("IN UNWIND")
         let exercises = NSKeyedUnarchiver.unarchiveObject(withFile: Exercise.ArchiveURL.path) as? [Exercise]
         
         if let sourceViewController = sender.source as? SelectPreferenceSetTableViewController, let preferenceSet = sourceViewController.selectedPreferenceSet, let workoutName = sourceViewController.workoutName {
@@ -162,21 +147,11 @@ class WorkoutListTableViewController: UITableViewController {
                 fatalError("Unable to create Segment")
             }
             
-            print("SEGMENT NAME: " + segment1.exercise.name)
-            
-            os_log("CREATED SEGMENT")
-            /*
-            guard let newWorkout = Workout(name: workoutName, user: "Bob", segments: [segment1]) else {
-                fatalError("Unable to instantiate exercise1")
-            }
-            */
-            os_log("CREATED WORKOUT")
             let newIndexPath = IndexPath(row: workouts.count, section: 0)
             
             workouts.append(newWorkout!)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
             
-            os_log("BEFORE SAVEWORKOUTS")
             // Save the exercises.
             saveWorkouts()
         }
@@ -240,9 +215,7 @@ class WorkoutListTableViewController: UITableViewController {
     }
     
     private func saveWorkouts() {
-        os_log("IN SAVEWORKOUTS")
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(workouts, toFile: Workout.ArchiveURL.path)
-        os_log("AFTER ARCHIVEROOTOBJECT")
         if isSuccessfulSave {
             os_log("Workouts successfully saved.", log: OSLog.default, type: .debug)
         } else {

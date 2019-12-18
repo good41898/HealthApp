@@ -1,10 +1,6 @@
 //
 //  ExerciseTableViewController.swift
-//  FoodTracker
-//
-//  Created by Jane Appleseed on 11/15/16.
-//  Copyright © 2016 Apple Inc. All rights reserved.
-//
+//  HealthApp
 
 import UIKit
 import os.log
@@ -22,8 +18,6 @@ class ExerciseTableViewController: UITableViewController {
         //navigationItem.leftBarButtonItem = editButtonItem
         
         // Load any saved exercises, otherwise load sample data.
-        loadSampleExercises()
-        /*
         if let savedExercises = loadExercises() {
             exercises += savedExercises
         }
@@ -31,7 +25,7 @@ class ExerciseTableViewController: UITableViewController {
             // Load the sample data.
             loadSampleExercises()
         }
- */
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,23 +83,6 @@ class ExerciseTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     //MARK: - Navigation
 
@@ -170,7 +147,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo1 = UIImage(named: "air_squat")
         
-        guard let exercise1 = Exercise(name: "Air Squat", photo: photo1, equipment: Set<String>(["bodyweight"]), bodyPart: Set<String>(["legs"])) else {
+        guard let exercise1 = Exercise(name: "Air Squat", photo: photo1, equipment: Set<String>(["bodyweight"]), bodyPart: Set<String>(["legs"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -178,7 +155,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo2 = UIImage(named: "burpee")
         
-        guard let exercise2 = Exercise(name: "Burpee", photo: photo2, equipment: Set<String>(["bodyweight"]), bodyPart: Set<String>(["legs", "arms"])) else {
+        guard let exercise2 = Exercise(name: "Burpee", photo: photo2, equipment: Set<String>(["bodyweight"]), bodyPart: Set<String>(["legs", "arms"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -186,7 +163,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo3 = UIImage(named: "barbell_thruster")
         
-        guard let exercise3 = Exercise(name: "Barbell Thruster", photo: photo3, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms"])) else {
+        guard let exercise3 = Exercise(name: "Barbell Thruster", photo: photo3, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -194,7 +171,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo4 = UIImage(named: "pull_up")
         
-        guard let exercise4 = Exercise(name: "Pull Up", photo: photo4, equipment: Set<String>(["pull up bar"]), bodyPart: Set<String>(["arms"])) else {
+        guard let exercise4 = Exercise(name: "Pull Up", photo: photo4, equipment: Set<String>(["pull up bar"]), bodyPart: Set<String>(["arms"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -202,7 +179,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo5 = UIImage(named: "stat_db_lunge")
         
-        guard let exercise5 = Exercise(name: "Stationary DB Lunge", photo: photo5, equipment: Set<String>(["dumbbell"]), bodyPart: Set<String>(["legs", "arms"])) else {
+        guard let exercise5 = Exercise(name: "Stationary DB Lunge", photo: photo5, equipment: Set<String>(["dumbbell"]), bodyPart: Set<String>(["legs", "arms"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -210,7 +187,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo6 = UIImage(named: "alt_db_snatch")
         
-        guard let exercise6 = Exercise(name: "Alt Dumbbell Snatch", photo: photo6, equipment: Set<String>(["dumbbell"]), bodyPart: Set<String>(["legs", "arms"])) else {
+        guard let exercise6 = Exercise(name: "Alt Dumbbell Snatch", photo: photo6, equipment: Set<String>(["dumbbell"]), bodyPart: Set<String>(["legs", "arms"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -218,7 +195,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo7 = UIImage(named: "row_sprint")
         
-        guard let exercise7 = Exercise(name: "Cal Row Sprint", photo: photo7, equipment: Set<String>(["rower"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+        guard let exercise7 = Exercise(name: "Cal Row Sprint", photo: photo7, equipment: Set<String>(["rower"]), bodyPart: Set<String>(["legs", "arms", "back"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -226,7 +203,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo8 = UIImage(named: "wb_shot")
         
-        guard let exercise8 = Exercise(name: "Wall Ball Shots", photo: photo8, equipment: Set<String>(["medicine ball"]), bodyPart: Set<String>(["legs", "arms"])) else {
+        guard let exercise8 = Exercise(name: "Wall Ball Shots", photo: photo8, equipment: Set<String>(["medicine ball"]), bodyPart: Set<String>(["legs", "arms"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -234,7 +211,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo9 = UIImage(named: "medball_clean")
         
-        guard let exercise9 = Exercise(name: "Med Ball Clean", photo: photo9, equipment: Set<String>(["medicine ball"]), bodyPart: Set<String>(["legs", "arms"])) else {
+        guard let exercise9 = Exercise(name: "Med Ball Clean", photo: photo9, equipment: Set<String>(["medicine ball"]), bodyPart: Set<String>(["legs", "arms"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -242,7 +219,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo10 = UIImage(named: "barbell_deadlift")
         
-        guard let exercise10 = Exercise(name: "Barbell Deadlift", photo: photo10, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+        guard let exercise10 = Exercise(name: "Barbell Deadlift", photo: photo10, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms", "back"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -250,7 +227,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo11 = UIImage(named: "hang_power_clean")
         
-        guard let exercise11 = Exercise(name: "Hang Power Clean", photo: photo11, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+        guard let exercise11 = Exercise(name: "Hang Power Clean", photo: photo11, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms", "back"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -258,7 +235,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo12 = UIImage(named: "power_clean")
         
-        guard let exercise12 = Exercise(name: "Power Clean", photo: photo12, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+        guard let exercise12 = Exercise(name: "Power Clean", photo: photo12, equipment: Set<String>(["barbell"]), bodyPart: Set<String>(["legs", "arms", "back"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         
@@ -266,7 +243,7 @@ class ExerciseTableViewController: UITableViewController {
         
         let photo13 = UIImage(named: "db_deadlift")
         
-        guard let exercise13 = Exercise(name: "Dumbbell Deadlift", photo: photo13, equipment: Set<String>(["dumbbell"]), bodyPart: Set<String>(["legs", "arms", "back"])) else {
+        guard let exercise13 = Exercise(name: "Dumbbell Deadlift", photo: photo13, equipment: Set<String>(["dumbbell"]), bodyPart: Set<String>(["legs", "arms", "back"]), weights: [0,0,0]) else {
             fatalError("Unable to instantiate exercise1")
         }
         

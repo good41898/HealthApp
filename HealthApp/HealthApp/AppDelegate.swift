@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  FoodTracker
+//  HealthApp
 //
 //  Created by Jane Appleseed on 10/17/16.
 //  Copyright © 2016 Apple Inc. All rights reserved.

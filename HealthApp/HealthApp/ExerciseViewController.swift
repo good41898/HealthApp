@@ -1,10 +1,6 @@
 //
 //  ExerciseViewController.swift
-//  FoodTracker
-//
-//  Created by Jane Appleseed on 10/17/16.
-//  Copyright © 2016 Apple Inc. All rights reserved.
-//
+//  HealthApp
 
 import UIKit
 import os.log
@@ -17,6 +13,9 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var equipmentText: UITextField!
     @IBOutlet weak var bodyText: UITextField!
+    @IBOutlet weak var lightWeightTextField: UITextField!
+    @IBOutlet weak var medWeightTextField: UITextField!
+    @IBOutlet weak var heavyWeightTextField: UITextField!
     
     /*
          This value is either passed by `ExerciseTableViewController` in `prepare(for:sender:)`
@@ -37,10 +36,23 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
             photoImageView.image = exercise.photo
             equipmentText.text = exercise.equipment.joined(separator: ",")
             bodyText.text = exercise.bodyPart.joined(separator: ",")
+            lightWeightTextField.text = String(exercise.weights[0])
+            medWeightTextField.text = String(exercise.weights[1])
+            heavyWeightTextField.text = String(exercise.weights[2])
         }
         
         // Enable the Save button only if the text field has a valid Exercise name.
         updateSaveButtonState()
+        
+            /*
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+
+        view.addGestureRecognizer(tap)
+ */
     }
     
     //MARK: UITextFieldDelegate
@@ -113,13 +125,18 @@ class ExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePick
         let photo = photoImageView.image
         let equipment = equipmentText.text ?? ""
         let bodyPart = bodyText.text ?? ""
+        let lightWeight = Int(lightWeightTextField.text ?? "")
+        let medWeight = Int(medWeightTextField.text ?? "")
+        let heavyWeight = Int(heavyWeightTextField.text ?? "")
         
         let equipmentSet = Set(equipment.split{$0 == ","}.map(String.init))
         
         let bodyPartSet = Set(bodyPart.split{$0 == ","}.map(String.init))
+        
+        let weights = [lightWeight, medWeight, heavyWeight]
     
         // Set the exercise to be passed to ExerciseTableViewController after the unwind segue.
-        exercise = Exercise(name: name, photo: photo, equipment: equipmentSet, bodyPart: bodyPartSet)
+        exercise = Exercise(name: name, photo: photo, equipment: equipmentSet, bodyPart: bodyPartSet, weights: weights as! [Int])
     }
     
     //MARK: Actions

@@ -1,10 +1,6 @@
 //
 //  Exercise.swift
-//  FoodTracker
-//
-//  Created by Jane Appleseed on 11/10/16.
-//  Copyright © 2016 Apple Inc. All rights reserved.
-//
+//  HealthApp
 
 import UIKit
 import os.log
@@ -18,6 +14,7 @@ class Exercise: NSObject, NSCoding {
     var photo: UIImage?
     var equipment: Set<String>
     var bodyPart: Set<String>
+    var weights: [Int]
     
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -30,11 +27,12 @@ class Exercise: NSObject, NSCoding {
         static let photo = "photo"
         static let equipment = "equipment"
         static let bodyPart = "bodyPart"
+        static let weights = "weights"
     }
     
     //MARK: Initialization
     
-    init?(name: String, photo: UIImage?, equipment: Set<String>, bodyPart: Set<String>) {
+    init?(name: String, photo: UIImage?, equipment: Set<String>, bodyPart: Set<String>, weights: [Int]) {
         
         // The name must not be empty
         guard !name.isEmpty else {
@@ -55,6 +53,7 @@ class Exercise: NSObject, NSCoding {
         self.photo = photo
         self.equipment = equipment
         self.bodyPart = bodyPart
+        self.weights = weights
     }
     
     //MARK: NSCoding
@@ -64,6 +63,7 @@ class Exercise: NSObject, NSCoding {
         aCoder.encode(photo, forKey: PropertyKey.photo)
         aCoder.encode(equipment, forKey: PropertyKey.equipment)
         aCoder.encode(bodyPart, forKey: PropertyKey.bodyPart)
+        aCoder.encode(weights, forKey: PropertyKey.weights)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -87,8 +87,13 @@ class Exercise: NSObject, NSCoding {
             return nil
         }
         
+        guard let weights = aDecoder.decodeObject(forKey: PropertyKey.weights) as? [Int] else {
+            os_log("Unable to decode the weights for a Exercise object", log: OSLog.default, type: .debug)
+            return nil
+        }
+        
         // Must call designated initializer.
-        self.init(name: name, photo: photo, equipment: equipment, bodyPart: bodyPart)
+        self.init(name: name, photo: photo, equipment: equipment, bodyPart: bodyPart, weights: weights)
         
     }
 }

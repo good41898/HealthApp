@@ -1,10 +1,6 @@
 //
 //  WorkoutTableViewController.swift
-//  FoodTracker
-//
-//  Created by Jane Appleseed on 11/15/16.
-//  Copyright © 2016 Apple Inc. All rights reserved.
-//
+//  HealthApp
 
 import UIKit
 import os.log
@@ -83,14 +79,6 @@ class PreferenceSetListTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
     
     @IBAction func unwindToPreferenceSetList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? CreatePreferenceSetViewController, let preference = sourceViewController.preference {

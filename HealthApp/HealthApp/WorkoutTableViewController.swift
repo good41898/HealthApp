@@ -1,10 +1,6 @@
 //
 //  WorkoutTableViewController.swift
-//  FoodTracker
-//
-//  Created by Jane Appleseed on 11/15/16.
-//  Copyright © 2016 Apple Inc. All rights reserved.
-//
+//  HealthApp
 
 import UIKit
 import os.log
@@ -61,9 +57,6 @@ class WorkoutTableViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         
         switch(segue.identifier ?? "") {
-
-        
-            
             
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")

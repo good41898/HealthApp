@@ -1,10 +1,6 @@
 //
 //  CreatePreferenceSetViewController.swift
-//  FoodTracker
-//
-//  Created by Noah Davis on 12/6/19.
-//  Copyright © 2019 Apple Inc. All rights reserved.
-//
+//  HealthApp
 
 import UIKit
 import os.log
