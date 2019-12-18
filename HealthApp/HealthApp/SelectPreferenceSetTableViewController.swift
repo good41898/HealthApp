@@ -16,7 +16,6 @@ class SelectPreferenceSetTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        os_log("MADE IT")
         
         let alert = UIAlertController(title: "Enter a name for your workout, the select a preference set to use", message: nil, preferredStyle: .alert)
 

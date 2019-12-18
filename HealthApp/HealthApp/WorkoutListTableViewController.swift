@@ -177,29 +177,33 @@ class WorkoutListTableViewController: UITableViewController {
             }
         }
         
-        let numSegments = 10
+        let numSegments = preferenceSet.numExercises
         var segments = [WorkoutSegment]()
-        
+        var mutableValidExercises = validExercises
         for _ in 1...numSegments {
-            if validExercises.isEmpty {
-                break
+            if mutableValidExercises.isEmpty {
+                mutableValidExercises = validExercises
             }
             
-            let num = Int.random(in: 0..<validExercises.count)
+            let num = Int.random(in: 0..<mutableValidExercises.count)
             
-            let exercise = validExercises[num]
-            validExercises.remove(at: num)
+            let exercise = mutableValidExercises[num]
+            mutableValidExercises.remove(at: num)
             
             let sets = Int.random(in: 1..<10)
             var reps = 0
+            var weight = 0
             if sets <= 3 {
                 reps = Int.random(in: 1..<20)
+                weight = exercise.weights[0]
             } else if sets <= 6 {
                 reps = Int.random(in: 1..<10)
+                weight = exercise.weights[1]
             } else {
                 reps = Int.random(in: 1..<5)
+                weight = exercise.weights[2]
             }
-            guard let segment = WorkoutSegment(exercise: exercise, sets: sets, reps: reps, weight: 0) else {
+            guard let segment = WorkoutSegment(exercise: exercise, sets: sets, reps: reps, weight: weight) else {
                 os_log("unable to create workout segment")
                 return nil
             }

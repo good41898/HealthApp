@@ -12,7 +12,7 @@ class WorkoutSegment: NSObject, NSCoding {
     var exercise: Exercise
     var sets: Int
     var reps: Int
-    var weight: Float
+    var weight: Int
     
     //MARK: Archiving Paths
 
@@ -43,7 +43,7 @@ class WorkoutSegment: NSObject, NSCoding {
 
         let reps = aDecoder.decodeInteger(forKey: PropertyKey.reps)
  
-        let weight = aDecoder.decodeFloat(forKey: PropertyKey.weight)
+        let weight = aDecoder.decodeInteger(forKey: PropertyKey.weight)
         
         // Must call designated initializer.
         self.init(exercise: exercise, sets: sets, reps: reps, weight: weight)
@@ -51,7 +51,7 @@ class WorkoutSegment: NSObject, NSCoding {
     }
     //MARK: Initialization
     
-    init?(exercise: Exercise, sets: Int, reps: Int, weight: Float) {
+    init?(exercise: Exercise, sets: Int, reps: Int, weight: Int) {
         // Initialize stored properties.
         self.exercise = exercise
         self.sets = sets

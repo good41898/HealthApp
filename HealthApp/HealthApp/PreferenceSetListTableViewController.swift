@@ -105,7 +105,7 @@ class PreferenceSetListTableViewController: UITableViewController {
     
     private func loadSamplePreferenceSets() {
         
-        guard let preference1 = PreferenceSet(name: "Gabby's Preferences", user: "Gabby Good", equipment: ["dumbbells", "squat rack", "treadmill"], bodyPart: ["arms", "quads"], mode: "Cardio") else {
+        guard let preference1 = PreferenceSet(name: "Gabby's Preferences", user: "Gabby Good", equipment: ["dumbbells", "squat rack", "treadmill"], bodyPart: ["arms", "quads"], mode: "Cardio", numExercises: 10) else {
             fatalError("Unable to instantiate preference1")
         }
 

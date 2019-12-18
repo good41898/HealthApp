@@ -27,6 +27,7 @@ class CreatePreferenceSetViewController: UIViewController, UIPickerViewDataSourc
     @IBOutlet weak var backSwitch: UISwitch!
     @IBOutlet weak var chestSwitch: UISwitch!
     
+    @IBOutlet weak var numExercisesTextField: UITextField!
     var preference: PreferenceSet?
     
     @IBOutlet weak var modePickerTextField: UITextField!
@@ -38,8 +39,6 @@ class CreatePreferenceSetViewController: UIViewController, UIPickerViewDataSourc
         
         let pickerView = UIPickerView()
         pickerView.delegate = self
-
-        modePickerTextField.inputView = pickerView
 
         // Do any additional setup after loading the view.
     }
@@ -141,8 +140,9 @@ class CreatePreferenceSetViewController: UIViewController, UIPickerViewDataSourc
             bodyPart.insert("chest")
         }
         
+        let numExercises = Int(numExercisesTextField.text ?? "")
         // Set the exercise to be passed to ExerciseTableViewController after the unwind segue.
-        preference = PreferenceSet(name: name, user: "Gabby Good", equipment: equipment, bodyPart: bodyPart, mode: "Cardio")
+        preference = PreferenceSet(name: name, user: "Gabby Good", equipment: equipment, bodyPart: bodyPart, mode: "Cardio", numExercises: numExercises!)
     }
 
     @IBAction func cancel(_ sender: UIBarButtonItem) {

@@ -14,6 +14,7 @@ class PreferenceSet: NSObject, NSCoding {
     var equipment: Set<String>
     var bodyPart: Set<String>
     var mode: String
+    var numExercises: Int
         
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -27,17 +28,19 @@ class PreferenceSet: NSObject, NSCoding {
         static let equipment = "equipment"
         static let bodyPart = "bodyPart"
         static let mode = "mode"
+        static let numExercises = "numExercises"
     }
     
     //MARK: Initialization
     
-    init?(name: String, user: String, equipment: Set<String>, bodyPart: Set<String>, mode: String) {
+    init?(name: String, user: String, equipment: Set<String>, bodyPart: Set<String>, mode: String, numExercises: Int) {
         // Initialize stored properties.
         self.name = name
         self.user = user
         self.equipment = equipment
         self.bodyPart = bodyPart
         self.mode = mode
+        self.numExercises = numExercises
     }
     
     //MARK: NSCoding
@@ -48,6 +51,7 @@ class PreferenceSet: NSObject, NSCoding {
         aCoder.encode(equipment, forKey: PropertyKey.equipment)
         aCoder.encode(bodyPart, forKey: PropertyKey.bodyPart)
         aCoder.encode(mode, forKey: PropertyKey.mode)
+        aCoder.encode(numExercises, forKey: PropertyKey.numExercises)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -78,8 +82,10 @@ class PreferenceSet: NSObject, NSCoding {
             return nil
         }
         
+        let numExercises = aDecoder.decodeInteger(forKey: PropertyKey.numExercises)
+        
         // Must call designated initializer.
-        self.init(name: name, user: user, equipment: equipment, bodyPart: bodyPart, mode: mode)
+        self.init(name: name, user: user, equipment: equipment, bodyPart: bodyPart, mode: mode, numExercises: numExercises)
         
     }
 }
